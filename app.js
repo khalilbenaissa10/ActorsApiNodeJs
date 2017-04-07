@@ -1,5 +1,5 @@
 var app = require('./src/lib/app')
-app.listen(3000)
+app.listen(process.env.PORT ||3000)
 var MongoClient = require('mongodb').MongoClient
     , format = require('util').format;
 MongoClient.connect('mongodb://khalil:khalil22307246@ds033607.mlab.com:33607/movies', function (err, db) {
