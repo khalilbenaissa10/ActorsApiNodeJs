@@ -3,12 +3,19 @@ var Actor = require('../models/actor');
 
 module.exports = {
 
-  getAll: function(req, res, next) {
-    Movie.find(function(err, movies) {
-      if (err) return res.status(400).json(err);
-
-      res.status(200).json(movies);
-    });
+  getAll: (req, res) => {
+    var response = {}
+       Movie.find()
+            .populate('actors')
+            .exec((err, data) => {
+            // Mongo command to fetch all data from collection.
+              if (err) {
+                response = {'error': true, 'message': 'Error fetching data'}
+              } else {
+                response = data
+              }
+              res.json(response)
+            })
   },
 
 
