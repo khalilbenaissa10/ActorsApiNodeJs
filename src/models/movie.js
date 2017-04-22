@@ -17,6 +17,10 @@ var movieSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
+  imagePath: {
+    type: String,
+    required: true
+  },
   actors: [{
     type : mongoose.Schema.ObjectId,
     ref : 'Actor'
