@@ -89,10 +89,18 @@ module.exports = {
     .exec(function(err, actor) {
       if (err) return res.status(400).json(err);
       if (!actor) return res.status(404).json();
-      console.log(movie);
-      movie.actors.splice(actor._id,1);
-      console.log(movie);
-      movie.save(function(err) {
+  
+      for (var i = 0; i < movie.actors.length; i++) {
+           if(( movie.actors[i]).toString()== actor._id.toString()){
+              console.log(movie.actors[i]) ; 
+              movie.actors.splice(i,1);
+               
+           }
+           //console.log(movie.actors[i]);
+    } 
+     // movie.actors.splice(actor.id-movie.actors.length);
+
+        movie.save(function(err) {
         if (err) return res.status(400).json(err);
 
         res.status(204).json(movie);
@@ -100,7 +108,7 @@ module.exports = {
     });
     
      
-      
+    
     });
   }
 
