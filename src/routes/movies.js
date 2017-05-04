@@ -80,12 +80,18 @@ module.exports = {
 
 
   deleteActor: function(req, res, next) {
-    Movie.findOne({ id: req.params.id }, function(err, movie) {
+    Movie.findOne({ id: req.params.mid }, function(err, movie) {
       if (err) return res.status(400).json(err);
       if (!movie) return res.status(404).json();
 
       // HACK TO CHANGE
-      movie.actors = [];
+    var actor =  Actor.findOne({ id: req.params.id })
+    .populate('movies')
+    .exec(function(err, actor) {
+      if (err) return res.status(400).json(err);
+      if (!actor) return res.status(404).json();
+    });
+     movie.actors.splice(actor._id,1);
       movie.save(function(err) {
         if (err) return res.status(400).json(err);
 

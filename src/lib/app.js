@@ -40,7 +40,7 @@ app.route('/movies/:id')
 .delete(movies.deleteOne);
 
 app.post('/movies/:id/actors', movies.addActor);
-app.delete('/movies/:id/actors/:mid', movies.deleteActor);
+app.delete('/movies/:mid/actors/:id', movies.deleteActor);
 
 
 module.exports = app;
