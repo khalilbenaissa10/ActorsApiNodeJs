@@ -85,18 +85,22 @@ module.exports = {
       if (!movie) return res.status(404).json();
 
       // HACK TO CHANGE
-    var actor =  Actor.findOne({ id: req.params.id })
-    .populate('movies')
+     Actor.findOne({ id: req.params.id })
     .exec(function(err, actor) {
       if (err) return res.status(400).json(err);
       if (!actor) return res.status(404).json();
-    });
-     movie.actors.splice(actor._id,1);
+      console.log(movie);
+      movie.actors.splice(actor._id,1);
+      console.log(movie);
       movie.save(function(err) {
         if (err) return res.status(400).json(err);
 
         res.status(204).json(movie);
-      })
+      });
+    });
+    
+     
+      
     });
   }
 
