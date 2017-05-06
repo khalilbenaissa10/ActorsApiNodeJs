@@ -34,7 +34,7 @@ module.exports = {
 
 
   updateOne: function(req, res, next) {
-    Actor.findOneAndUpdate({ id: req.params.id }, req.body, function(err, actor) {
+    Actor.findOneAndUpdate({ id: req.params.id }, req.body, {new: true}, function(err, actor) {
       if (err) return res.status(400).json(err);
       if (!actor) return res.status(404).json();
 
