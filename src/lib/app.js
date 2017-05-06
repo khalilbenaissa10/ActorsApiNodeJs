@@ -1,4 +1,5 @@
 var express = require('express');
+var cors = require('cors')
 var app     = express();
 
 require('./db')(app);
@@ -14,6 +15,8 @@ app.use(function(req, res, next){
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 })
+
+app.use(cors())
 
 // Actors routes
 app.route('/actors')
